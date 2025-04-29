@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>แจ้งงานบริการ</title>
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #f9f5ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    form {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    h1 {
+      text-align: center;
+      color: #6a1b9a;
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      background: #f4f4f8;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #ba68c8;
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #9c27b0;
+    }
+  </style>
+</head>
+<body>
+
+<form id="serviceForm">
+  <h1>แจ้งงานบริการ</h1>
+
+  <label for="jobtype">ลักษณะงาน</label>
+  <select id="jobtype" name="entry.1048293956" required>
+    <option value="">-- กรุณาเลือก --</option>
+    <option value="งานซ่อมนอกประกัน">งานซ่อมนอกประกัน</option>
+    <option value="งานเคลม">งานเคลม</option>
+    <option value="เช็คระยะ">เช็คระยะ</option>
+  </select>
+
+  <label for="customername">ชื่อลูกค้า *</label>
+  <input type="text" id="customername" name="entry.1262365549" required>
+
+  <label for="address">ที่อยู่</label>
+  <textarea id="address" name="entry.1707926618"></textarea>
+
+  <label for="phone">เบอร์ติดต่อ *</label>
+  <input type="tel" id="phone" name="entry.802374694" required>
+
+  <label for="hours">ชั่วโมงทำงาน *</label>
+  <input type="text" id="hours" name="entry.340844347" required>
+
+  <label for="problem">รายละเอียดปัญหา *</label>
+  <textarea id="problem" name="entry.952476075" required></textarea>
+
+  <label for="notifier">ชื่อผู้แจ้ง *</label>
+  <input type="text" id="notifier" name="entry.1604520998" required>
+
+  <button type="submit">ส่งข้อมูล</button>
+</form>
+
+<script>
+document.getElementById('serviceForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const formData = new FormData(form);
+  
+  const action = 'https://docs.google.com/forms/d/e/1FAIpQLSfcTaC9RtmlkMZSvmfSu4JQuy585_8I3vQh0IRZhcCyZ684zQ/formResponse';
+  
+  fetch(action, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  }).then(() => {
+    alert('ส่งข้อมูลเรียบร้อยแล้ว');
+    form.reset();
+  }).catch(() => {
+    alert('เกิดข้อผิดพลาด กรุณาลองใหม่');
+  });
+});
+</script>
+
+</body>
+</html>
