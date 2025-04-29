@@ -1,117 +1,109 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>แจ้งงานบริการ</title>
   <style>
     body {
-      font-family: 'Sarabun', sans-serif;
-      background: #f9f5ff;
+      background: #0b0c2a;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
     }
-    form {
-      background: #ffffff;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 500px;
+
+    .form-container {
+      background: rgba(0, 17, 51, 0.9);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #00f0ff;
+      width: 400px;
     }
+
     h1 {
       text-align: center;
-      color: #6a1b9a;
-      margin-bottom: 1rem;
+      color: #00f0ff;
+      margin-bottom: 30px;
     }
+
     label {
       display: block;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      color: #333;
+      margin-top: 15px;
+      color: #aadfff;
     }
-    input, textarea, select {
+
+    input, select, textarea {
       width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      background: #f4f4f8;
-    }
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background: #ba68c8;
-      color: #fff;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
       border: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      cursor: pointer;
+      background: #0e1a3a;
+      color: #fff;
+      outline: none;
+      box-shadow: inset 0 0 5px #00f0ff;
     }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background: #00f0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00f0ff;
+    }
+
     button:hover {
-      background: #9c27b0;
+      background: #00d0e0;
     }
   </style>
 </head>
 <body>
+  <div class="form-container">
+    <h1>แจ้งงานบริการ</h1>
+    <form id="serviceForm">
+      <label>ลักษณะงาน</label>
+      <select name="entry.1955474004" required>
+        <option value="งานซ่อมนอกประกัน">งานซ่อมนอกประกัน</option>
+        <option value="งานเคลม">งานเคลม</option>
+        <option value="เช็คระยะ">เช็คระยะ</option>
+      </select>
 
-<form id="serviceForm">
-  <h1>แจ้งงานบริการ</h1>
+      <label>ชื่อลูกค้า</label>
+      <input type="text" name="entry.572981351" required>
 
-  <label for="jobtype">ลักษณะงาน</label>
-  <select id="jobtype" name="entry.1048293956" required>
-    <option value="">-- กรุณาเลือก --</option>
-    <option value="งานซ่อมนอกประกัน">งานซ่อมนอกประกัน</option>
-    <option value="งานเคลม">งานเคลม</option>
-    <option value="เช็คระยะ">เช็คระยะ</option>
-  </select>
+      <label>เบอร์ติดต่อ</label>
+      <input type="tel" name="entry.1304868128" required>
 
-  <label for="customername">ชื่อลูกค้า *</label>
-  <input type="text" id="customername" name="entry.1262365549" required>
+      <label>ชั่วโมงทำงาน</label>
+      <input type="number" name="entry.1570063406" required>
 
-  <label for="address">ที่อยู่</label>
-  <textarea id="address" name="entry.1707926618"></textarea>
+      <label>รายละเอียดปัญหา</label>
+      <textarea name="entry.1476483317" rows="3" required></textarea>
 
-  <label for="phone">เบอร์ติดต่อ *</label>
-  <input type="tel" id="phone" name="entry.802374694" required>
+      <label>ชื่อผู้แจ้ง</label>
+      <input type="text" name="entry.2007367725" required>
 
-  <label for="hours">ชั่วโมงทำงาน *</label>
-  <input type="text" id="hours" name="entry.340844347" required>
+      <button type="submit">ส่งข้อมูล</button>
+    </form>
+  </div>
 
-  <label for="problem">รายละเอียดปัญหา *</label>
-  <textarea id="problem" name="entry.952476075" required></textarea>
-
-  <label for="notifier">ชื่อผู้แจ้ง *</label>
-  <input type="text" id="notifier" name="entry.1604520998" required>
-
-  <button type="submit">ส่งข้อมูล</button>
-</form>
-
-<script>
-document.getElementById('serviceForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const form = e.target;
-  const formData = new FormData(form);
-  
-  const action = 'https://docs.google.com/forms/d/e/1FAIpQLSfcTaC9RtmlkMZSvmfSu4JQuy585_8I3vQh0IRZhcCyZ684zQ/formResponse';
-  
-  fetch(action, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData
-  }).then(() => {
-    alert('ส่งข้อมูลเรียบร้อยแล้ว');
-    form.reset();
-  }).catch(() => {
-    alert('เกิดข้อผิดพลาด กรุณาลองใหม่');
-  });
-});
-</script>
-
+  <script>
+    const form = document.getElementById('serviceForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const baseURL = "https://docs.google.com/forms/d/e/1FAIpQLSfcTaC9RtmlkMZSvmfSu4JQuy585_8I3vQh0IRZhcCyZ684zQ/formResponse?";
+      const formData = new FormData(form);
+      const params = new URLSearchParams(formData).toString();
+      window.location.href = baseURL + params;
+    });
+  </script>
 </body>
 </html>
