@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>แจ้งงานบริการ</title>
+  <style>
+    body {
+      background: #fdf6f0;
+      font-family: 'Sarabun', sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #a8877d;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ffc5bd;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ffb3aa;
+    }
+  </style>
+</head>
+<body>
+
+<h1>แจ้งงานบริการ</h1>
+
+<form id="serviceForm">
+  <label>ลักษณะงาน *</label>
+  <select name="entry.1633661961" required>
+    <option value="">-- เลือก --</option>
+    <option value="งานซ่อมนอกประกัน">งานซ่อมนอกประกัน</option>
+    <option value="งานเคลม">งานเคลม</option>
+    <option value="เช็คระยะ">เช็คระยะ</option>
+  </select>
+
+  <label>ชื่อลูกค้า *</label>
+  <input type="text" name="entry.1508006843" required>
+
+  <label>ที่อยู่</label>
+  <input type="text" name="entry.588755430">
+
+  <label>เบอร์ติดต่อ *</label>
+  <input type="text" name="entry.1470557855" required>
+
+  <label>ชั่วโมงทำงาน *</label>
+  <input type="text" name="entry.985344166" required>
+
+  <label>รายละเอียดปัญหา *</label>
+  <textarea name="entry.1762062924" required></textarea>
+
+  <label>รูปประกอบ 1</label>
+  <input type="file" disabled placeholder="(อัปโหลดได้ในเวอร์ชั่นต่อไป)">
+
+  <label>รูปประกอบ 2</label>
+  <input type="file" disabled placeholder="(อัปโหลดได้ในเวอร์ชั่นต่อไป)">
+
+  <label>ชื่อผู้แจ้ง *</label>
+  <input type="text" name="entry.1269361935" required>
+
+  <button type="submit">ส่งข้อมูล</button>
+</form>
+
+<script>
+const form = document.getElementById('serviceForm');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  
+  const formData = new FormData(form);
+
+  fetch('https://docs.google.com/forms/d/e/1FAIpQLSclqRbf_taBqJTz38EvDstRyLfA0ujCmogNP9TbbiOaVnUyyA/formResponse', {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  }).then(() => {
+    alert('ส่งข้อมูลเรียบร้อยแล้ว!');
+    form.reset();
+  }).catch((error) => {
+    alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
+    console.error(error);
+  });
+});
+</script>
+
+</body>
+</html>
